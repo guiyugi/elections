@@ -30,7 +30,6 @@
     const requestData = JSON.stringify({ nome: candidateInput.value })
     xhr.send(requestData)
   })();
-  
   function submitSelection() {
     const candidateInput = document.getElementById('candidateInput')
     const nome = candidateInput.value
@@ -42,7 +41,7 @@
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
         const candidateInfo = JSON.parse(xhr.responseText)
-        displayCandidateInfo(candidateInfo)
+        displayCandidate(candidateInfo)
       } else {
         console.error('Erro na resposta do servidor')
       }
@@ -57,22 +56,17 @@
   
     candidateInput.value = ''
   }
-  
-  function displayCandidateInfo(candidateInfo) {
-    const candidateArray = candidateInfo
+  function selecterOffice() {
+    var select = document.getElementById("select");
+    var valorSelecionado = select.options[select.selectedIndex].value;
+    console.log("Valor selecionado: " + valorSelecionado);
+}
+function displayCandidate(candidateInfo) {
+  const cand_name = candidateInfo[0].cand_nome
+  const carg_nome = candidateInfo[0].cargo_nome
+  const cand_votos = candidateInfo[0].cand_votos
+  console.log(candidateInfo[0].cand_nome)
+  console.log(`teste -> ${cand_name}, ${carg_nome}, ${cand_votos}`)
+  //pesquisa por candidato pornto, aqui
+}
 
-    const candidateInfoDiv = document.getElementById('candidateInfo')
-    candidateInfoDiv.innerHTML = ''
-        candidateArray.forEach(candidato => {
-            const paragraphName = document.createElement('p');
-            paragraphName.textContent = `Nome: ${candidato.cand_nome || 'N/A'}`
-            candidateInfoDiv.appendChild(paragraphName)
-    
-            const paragraphOffice = document.createElement('p');
-            paragraphOffice.textContent = `Cargo: ${candidato.cargo_nome || 'N/A'}`
-            candidateInfoDiv.appendChild(paragraphOffice)
-    
-            const paragraphVotes = document.createElement('p');
-            paragraphVotes.textContent = `Votos: ${candidato.cand_votos || 'N/A'}`
-            candidateInfoDiv.appendChild(paragraphVotes)
-        })}

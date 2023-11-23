@@ -7,6 +7,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.post('/candidatos', endpoints.searchByCandidate)
+app.post('/byoffice', endpoints.searchOffice)
 
 app.listen(3333, () => {
     console.log('o servidor iniciou')

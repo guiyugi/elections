@@ -19,23 +19,38 @@ function searchInDatabase(candidate, response) {
       searchInDatabase(request.body.nome, response)
   }
 
-  function searchByOffice(request, response) {
-  const { cargo } = request.body
-  const sqlForOffice = 'SELECT cand_nome, cargo_nome, cand_votos from votos_cand_estado where cargo_id = ?'
-
+  function searchByOffice(office, response) {
+  const sqlForOffice = 'SELECT cand_nome, cargo_nome, cand_votos from votos_cand_estado where cargo_nome= ?'
   database.db.all(sqlForOffice, [cargo], (err, rows) => {
     if (err) {
       throw err
     }
     const candidates = JSON.stringify(rows)
     response.send(candidates)
-  })
+  })}
+
+  function searchOffice(request, response) {
+    console.log('Requisição POST recebida')
+
+  const cargoId = request.body.cargoId;
+
+  const sqlOffice = 'SELECT cand_nome,  cargo_nome, cand_votos, cand_status FROM votos_cand_estado WHERE cargo_id = ?'
+
+  database.db.all(sqlOffice, [cargoId], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+
+    response.json(rows); // Envie a resposta após o término de todas as linhas
+  });
 }
+
 
 
 
 
 module.exports = {
     searchByCandidate,
-    searchByOffice
+    searchByOffice,
+    searchOffice
 }

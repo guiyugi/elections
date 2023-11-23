@@ -8,15 +8,23 @@
   <body>
     <h1>Eleições 2022</h1>
     
-    <div id="container">
-      <label for="candidateInput">Selecione Candidato:</label>
-      <input type="text" id="candidateInput" list="candidateList">
-      <datalist id="candidateList"></datalist>
-      <button id="submitBtn" onclick = "submitSelection()">Enviar Seleção</button>
+    <div class="selects" id="office">
+      <label for="office">Selecione Cargo:</label>
+      <select id="select" onchange="enviarRequisicao()">
+        <option value="" selected disabled>Selecione uma opção</option>
+        <option value="1">Presidente</option>
+        <option value="6">Deputado Federal</option>
+        <option value="7">Deputado Estadual</option>
+        <option value="3">Governador</option>
+        <option value="5">Senador</option>
+    </select>
+    
     </div>
+    
     <div id="candidateInfo"></div>
 
-    <script src = './js/main.js'>
+    <script src = "./js/byoffice.js">
+  
     </script>
   </body>
 </html>
