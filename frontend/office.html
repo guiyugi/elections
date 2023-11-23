@@ -3,41 +3,28 @@
   <head>
     <title>Eleições 2022</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <header>
-        <div class="title1">
-            <h1>Eleições 2022</h1>
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="candidate.html">Candidato</a>
-            <a href="office.html">Cargo</a>
-            <a href="county.html">Município</a>
-            <a href="all.html">Todos</a>
-        </nav>
-    </header>
-
-
+    <h1>Eleições 2022</h1>
+    
     <div class="selects" id="office">
-        <label for="office">Selecione Cargo:</label>
-        <select name="select">
-            <option value="1">Presidente</option>
-            <option value="6" >Deputado Federal</option>
-            <option value="7" >Deputado Estadual</option>
-            <option value="3">Governador</option>
-            <option value="5">Senador</option>
-
-        </select>
+      <label for="office">Selecione Cargo:</label>
+      <select id="select" onchange="enviarRequisicao()">
+        <option value="" selected disabled>Selecione uma opção</option>
+        <option value="1">Presidente</option>
+        <option value="6">Deputado Federal</option>
+        <option value="7">Deputado Estadual</option>
+        <option value="3">Governador</option>
+        <option value="5">Senador</option>
+    </select>
+    
     </div>
     
+    <div id="candidateInfo"></div>
 
-
-    <footer>
-        <p>Progamação III</p>
-    </footer>
-
-    
+    <script src = "./js/byoffice.js">
+  
+    </script>
   </body>
 </html>

@@ -1,72 +1,94 @@
-(function listCandidate() {
-    const candidateInput = document.getElementById('candidateInput')
-  
-    const xhr = new XMLHttpRequest()
-  
-    xhr.open('POST', 'http://localhost:3333/candidatos', true)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-  
-    xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        const candidateList = document.getElementById('candidateList')
-        const candidatosData = JSON.parse(xhr.responseText)
-  
-        candidateList.innerHTML = ''
-  
-        candidatosData.forEach(candidato => {
-          const optionItem = document.createElement('option')
-          optionItem.value = candidato.cand_nome
-          candidateList.appendChild(optionItem)
-        })
-      } else {
-        console.error('Erro ao buscar candidatos:', xhr.statusText)
-      }
-    }
-  
-    xhr.onerror = function () {
-      console.error('Erro na requisição.')
+document.addEventListener('DOMContentLoaded', function () {
+  // limpa o candidate list caso o usuario saia da pagina
+  window.addEventListener('beforeunload', function () {
+    document.getElementById('candidateList').value = ''
+  })
+
+  document.getElementById('submitBtn').addEventListener('click', submitSelection)
+  listCandidates()
+})
+
+async function listCandidates() {
+  const candidateList = document.getElementById('candidateList')
+  const datalist = document.getElementById('candidateDatalist')
+
+  try {
+    const response = await fetch('http://localhost:3333/candidatos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: '' }), // obtem todos candidados
+    })
+
+    if (!response.ok) {
+      throw new Error(`Erro ao buscar candidatos: ${response.statusText}`)
     }
 
-    const requestData = JSON.stringify({ nome: candidateInput.value })
-    xhr.send(requestData)
-  })();
-  function submitSelection() {
-    const candidateInput = document.getElementById('candidateInput')
-    const nome = candidateInput.value
-  
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', 'http://localhost:3333/candidatos', true)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-  
-    xhr.onload = function () {
-      if (xhr.status >= 200 && xhr.status < 300) {
-        const candidateInfo = JSON.parse(xhr.responseText)
-        displayCandidate(candidateInfo)
-      } else {
-        console.error('Erro na resposta do servidor')
-      }
-    }
-  
-    xhr.onerror = function () {
-      console.error('Erro na requisição.')
-    }
-  
-    const requestData = JSON.stringify({ nome: nome })
-    xhr.send(requestData)
-  
-    candidateInput.value = ''
+    const candidatesData = await response.json()
+
+    datalist.innerHTML = ''
+
+    candidatesData.forEach(candidate => {
+      const optionItem = document.createElement('option')
+      optionItem.value = candidate.cand_nome
+      datalist.appendChild(optionItem)
+    })
+  } catch (error) {
+    console.error('Erro na requisição:', error.message)
   }
-  function selecterOffice() {
-    var select = document.getElementById("select");
-    var valorSelecionado = select.options[select.selectedIndex].value;
-    console.log("Valor selecionado: " + valorSelecionado);
-}
-function displayCandidate(candidateInfo) {
-  const cand_name = candidateInfo[0].cand_nome
-  const carg_nome = candidateInfo[0].cargo_nome
-  const cand_votos = candidateInfo[0].cand_votos
-  console.log(candidateInfo[0].cand_nome)
-  console.log(`teste -> ${cand_name}, ${carg_nome}, ${cand_votos}`)
-  //pesquisa por candidato pornto, aqui
 }
 
+async function submitSelection() {
+  const candidateList = document.getElementById('candidateList')
+  const candidateInfoDiv = document.getElementById('candidateInfo')
+  const name = candidateList.value
+
+  try {
+    const response = await fetch('http://localhost:3333/candidatos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name: name }),
+    })
+
+    if (response.ok) {
+      const candidateInfo = await response.json()
+      displayCandidate(candidateInfo, candidateInfoDiv)
+      // Atualize a lista de candidatos
+      listCandidates()
+    } else {
+      console.error('Erro na resposta do servidor')
+    }
+  } catch (error) {
+    console.error('Erro na requisição:', error)
+  }
+
+  // Limpa a seleção no datalist
+  candidateList.value = ''
+}
+
+function displayCandidate(candidateInfo, container) {
+  // Limpa as informações anteriores
+  container.innerHTML = ''
+
+  if (Array.isArray(candidateInfo)) {
+    candidateInfo.forEach(candidate => {
+      appendCandidateInfo(candidate, container)
+    })
+  } else {
+    appendCandidateInfo(candidateInfo, container)
+  }
+}
+
+function appendCandidateInfo(candidate, container) {
+  const cand_name = candidate.cand_nome
+  const carg_nome = candidate.cargo_nome
+  const cand_votos = candidate.cand_votos
+
+  const candidateInfoItem = document.createElement('p')
+  candidateInfoItem.textContent = `Candidato: ${cand_name}, Cargo: ${carg_nome}, Votos: ${cand_votos}`
+
+  container.appendChild(candidateInfoItem)
+}
