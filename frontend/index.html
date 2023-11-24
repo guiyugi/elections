@@ -1,29 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <title>Eleições 2022</title>
     <meta charset="utf-8">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <h1>Eleições 2022</h1>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
 
-    <div class="selects" id="office">
-        <label for="office">Selecione Cargo:</label>
-        <select id="select" onchange="enviarRequisicao()">
-            <option value="" selected disabled>Selecione uma opção</option>
-            <option value="1">Presidente</option>
-            <option value="6">Deputado Federal</option>
-            <option value="7">Deputado Estadual</option>
-            <option value="3">Governador</option>
-            <option value="5">Senador</option>
-        </select>
+    <header>
+        <div class="title1">
+            <h1>Eleições 2022</h1>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="candidate.html">Candidato</a>
+            <a href="office.html">Cargo</a>
+            <a href="county.html">Município</a>
+            <a href="all.html">Todos</a>
+        </nav>
+    </header>
+
+    <div class="button">
+        <div class="button-title">
+            <h2>Pesquise por:</h2>
+        </div>
+        <div class="wrapper">
+            <a href='candidate.html' class="btn btn-primary mb-3">Candidato</a>
+            <a href='office.html' class="btn btn-primary mb-3">Cargo</a>
+            <a href='county.html' class="btn btn-primary mb-3">Município</a>
+            <a href='all.html' class="btn btn-primary mb-3">Todos</a>
+        </div>
+    </div>
+    
+
+    <div class="d-inline">
+        <img class="d-flex position-fixed  my-5 w-100" src="./css/city.jpg" alt="Imagem de exemplo">
     </div>
 
-    <table id="candidateTable">
-        <!-- A tabela será preenchida dinamicamente com os resultados -->
-    </table>
+    <footer class="d-inline-blockfixed-bottom text-white text-center py-3">
+        <p>Antonio Guilherme</p>
+        <p>Nicson Costa</p>
+        <p>Milena Andrade</p>
+    </footer>
+</div>
 
-    <script src="./js/main.js"></script>
-</body>
+  </body>
 </html>

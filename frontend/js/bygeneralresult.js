@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
           } else if (selectedStatus === 'eleito') {
             return candidate.cand_status === 1
           } else if (selectedStatus === 'naoeleito') {
-            return [0, 2].includes(candidate.cand_status)
+            return candidate.cand_status === 0
           }
         })
 
@@ -36,10 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const headerRow = document.createElement('tr')
         headerRow.innerHTML = '<th>Candidato</th><th>Cargo</th><th>Votos</th><th>Status</th>'
         table.appendChild(headerRow)
-
+        
         filteredResults.forEach(candidate => {
           const row = document.createElement('tr')
-          row.innerHTML = `<td>${candidate.cand_nome}</td><td>${candidate.cargo_nome}</td><td>${candidate.cand_votos}</td><td>${candidate.cand_status}</td>`
+          row.innerHTML = `<td>${candidate.cand_nome}</td><td>${candidate.cargo_nome}</td><td>${candidate.cand_votos}</td><td>${candidate.cand_status===1?'Eleito':'Não eleito'}</td>`
           table.appendChild(row)
         })
 

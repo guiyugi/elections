@@ -62,7 +62,7 @@ function displayCandidate(candidateInfo, container) {
 
   if (Array.isArray(candidateInfo)) {
     const headerRow = document.createElement('tr')
-    headerRow.innerHTML = '<th>Candidato</th><th>Cargo</th><th>Votos</th>'
+    headerRow.innerHTML = '<th>Candidato</th><th>Cargo</th><th>Votos</th><th>Status</th>'
     table.appendChild(headerRow)
 
     candidateInfo.forEach(candidate => {
@@ -79,6 +79,13 @@ function appendCandidateInfoToTable(candidate, table) {
   const cand_name = candidate.cand_nome
   const carg_nome = candidate.cargo_nome
   const cand_votos = candidate.cand_votos
+  let cand_status = undefined
+
+  if (candidate.cand_status == 1) {
+      cand_status = 'eleito'
+  } else {
+      cand_status = 'não eleito'
+  }
   document.addEventListener("DOMContentLoaded", function () {
     const selectMunicipios = document.getElementById("municipios")
     const candidateInfoDiv = document.getElementById('candidateInfo')
@@ -159,9 +166,10 @@ function appendCandidateInfoToTable(candidate, table) {
     const cand_name = candidate.cand_nome
     const carg_nome = candidate.cargo_nome
     const cand_votos = candidate.cand_votos
+    const cand_status = candidate.cand_status
   
     const candidateInfoItem = document.createElement('p')
-    candidateInfoItem.textContent = `Candidato: ${cand_name}, Cargo: ${carg_nome}, Votos: ${cand_votos}`
+    candidateInfoItem.textContent = `Candidato: ${cand_name}, Cargo ucvweuvcuwedyvcuwysd : ${carg_nome}, Votos: ${cand_votos}, Status: ${cand_status}`
   
     container.appendChild(candidateInfoItem)
   }
@@ -176,7 +184,7 @@ function appendCandidateInfoToTable(candidate, table) {
   }
   const row = document.createElement('tr')
 
-  row.innerHTML = `<td>${cand_name}</td><td>${carg_nome}</td><td>${cand_votos}</td>`
+  row.innerHTML = `<td>${cand_name}</td><td>${carg_nome}</td><td>${cand_votos}</td><td>${cand_status}</td>`
 
   table.appendChild(row)
 }
@@ -189,4 +197,4 @@ function appendTotalVotesInfo(votes, container) {
 
   container.innerHTML = ''
   container.appendChild(allVotes)
-}
+}  

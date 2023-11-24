@@ -46,21 +46,28 @@ function displayCandidate(candidateInfoArray) {
 
   const thead = document.createElement('thead')
   const headerRow = document.createElement('tr')
-  headerRow.innerHTML = '<th>Nome</th><th>Cargo</th><th>Votos</th>'
+  headerRow.innerHTML = '<th>Nome</th><th>Cargo</th><th>Votos</th><th>Status</th>'
   thead.appendChild(headerRow)
   candidateTable.appendChild(thead)
 
   const tbody = document.createElement('tbody')
 
-  candidateInfoArray.forEach((candidateInfo) => {
-      const cand_name = candidateInfo.cand_nome
-      const cargo_nome = candidateInfo.cargo_nome
-      const cand_votos = candidateInfo.cand_votos
+    candidateInfoArray.forEach((candidateInfo) => {
+    const cand_name = candidateInfo.cand_nome
+    const cargo_nome = candidateInfo.cargo_nome
+    const cand_votos = candidateInfo.cand_votos
+    let cand_status = candidateInfo.cand_status
 
-      const row = document.createElement('tr')
+    if (cand_status == 1) {
+        cand_status = 'Eleito'
+    } else {
+        cand_status = 'Não Eleito'
+    }    
+
+    const row = document.createElement('tr')
 
 
-      row.innerHTML = `<td>${cand_name}</td><td>${cargo_nome}</td><td>${cand_votos}</td>`
+      row.innerHTML = `<td>${cand_name}</td><td>${cargo_nome}</td><td>${cand_votos}</td><td>${cand_status}</td>`
 
 
       tbody.appendChild(row)

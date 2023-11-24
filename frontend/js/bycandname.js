@@ -4,7 +4,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('candidateList').value = ''
   })
 
-  document.getElementById('submitBtn').addEventListener('click', submitSelection)
+  document.getElementById('candidateForm').onsubmit = function(event) {
+    submitSelection();
+    event.preventDefault();
+  };
+  
   listCandidates()
 })
 
@@ -38,47 +42,67 @@ async function listCandidates() {
   }
 }
 
-async function submitSelection() {
+async function submitSelection(event) {
   const candidateList = document.getElementById('candidateList')
   const candidateInfoDiv = document.getElementById('candidateInfo')
-  const name = candidateList.value
+  const name = candidateList.value.trim()
+  const table = document.createElement('table')
 
-  try {
-    const response = await fetch('http://localhost:3333/candidatos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name: name }),
-    })
+  if(name == '') {
+      candidateInfoDiv.innerHTML=''
+      const headerRow = document.createElement('tr')
+      headerRow.innerHTML = '<th>Candidato Invalido</th>'
+      table.appendChild(headerRow)
+      candidateInfoDiv.appendChild(table)
 
-    if (response.ok) {
-      const candidateInfo = await response.json()
-      displayCandidate(candidateInfo, candidateInfoDiv)
-      listCandidates()
-    } else {
-      console.error('Erro na resposta do servidor')
-    }
-  } catch (error) {
-    console.error('Erro na requisição:', error)
+  } else {
+      
+      try {
+          const response = await fetch('http://localhost:3333/candidatos', {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ name: name }),
+          })
+
+          if (response.ok) {
+              const candidateInfo = await response.json()
+              displayCandidate(candidateInfo, candidateInfoDiv)
+              listCandidates()
+          } else {
+              console.error('Erro na resposta do servidor')
+          }
+      } catch (error) {
+          console.error('Erro na requisição:', error)
+      }
   }
-
   candidateList.value = ''
+  event.preventDefault();
 }
 
 function displayCandidate(candidateInfo, container) {
   container.innerHTML = ''
 
   const table = document.createElement('table')
-
+  
   if (Array.isArray(candidateInfo)) {
-    const headerRow = document.createElement('tr')
-    headerRow.innerHTML = '<th>Candidato</th><th>Cargo</th><th>Votos</th>'
-    table.appendChild(headerRow)
-
-    candidateInfo.forEach(candidate => {
-      appendCandidateInfoToTable(candidate, table)
-    })
+      if(candidateInfo.length == 0){
+          const candidateInfoDiv = document.getElementById('candidateInfo')
+          candidateInfoDiv.innerHTML=''
+          const headerRow = document.createElement('tr')
+          headerRow.innerHTML = '<th>Candidato não encontrado</th>'
+          table.appendChild(headerRow)
+          candidateInfoDiv.appendChild(table)
+      }else{
+          const headerRow = document.createElement('tr')
+          headerRow.innerHTML = '<th>Candidato</th><th>Cargo</th><th>Votos</th><th>Status</th>'
+          table.appendChild(headerRow)
+      
+          candidateInfo.forEach(candidate => {
+              appendCandidateInfoToTable(candidate, table)
+          })
+      }
   } else {
     appendCandidateInfoToTable(candidateInfo, table)
   }
@@ -91,10 +115,17 @@ function appendCandidateInfoToTable(candidate, table) {
   const cand_name = candidate.cand_nome
   const carg_nome = candidate.cargo_nome
   const cand_votos = candidate.cand_votos
+  let cand_status = undefined
+
+  if (candidate.cand_status == 1) {
+      cand_status = 'Eleito'
+  } else {
+      cand_status = 'Não Eleito'
+  }
 
   const row = document.createElement('tr')
 
-  row.innerHTML = `<td>${cand_name}</td><td>${carg_nome}</td><td>${cand_votos}</td>`
+  row.innerHTML = `<td>${cand_name}</td><td>${carg_nome}</td><td>${cand_votos}</td><td>${cand_status}</td>`
 
   table.appendChild(row)
 }
