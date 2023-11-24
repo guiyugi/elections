@@ -9,16 +9,14 @@
     <h1>Eleições 2022</h1>
     
     <div id="container">
-      <form id="candidateForm">
-        <label for="candidateInput">Selecione Candidato:</label>
-        <input type="text" id="candidateList" list="candidateDatalist">
-        <datalist id="candidateDatalist"></datalist>
-        <button type="button" id="submitBtn">Enviar Seleção</button>
-      </form>
+      <label for="municipios">Selecione um município:</label>
+      <select id="municipios">
+      <option id = "escolhido" value="">Selecione...</option>
+      </select>
     </div>
     
     <div id="candidateInfo"></div>
-
+    <div id = "container2"></div>
     <script src="./js/main.js"></script>
   </body>
 </html>

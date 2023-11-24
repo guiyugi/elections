@@ -47,9 +47,67 @@ function searchOffice(request, response) {
     response.json(rows); // Envie a resposta após o término de todas as linhas
   });
 }
+function listMunicipalities(request, response){
+  const listMunicipalities = 'SELECT * FROM municipio'
+  
+
+  
+
+  database.db.all(listMunicipalities, (err, rows) => {
+    if (err) {
+      throw err
+    }
+
+    const sortedMunicipalities = rows.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' }))
+    const municipalities = JSON.stringify(sortedMunicipalities)
+    response.send(municipalities)
+  })
+  
+}
+
+
+function searchByMunicipalities(request, response) {
+  const sqlForMunicipalities = 'SELECT cand_nome, cargo_nome, cand_votos, cand_status FROM votos_cand_municipio WHERE muni_id = ?'
+  const chosenMunicipalityId = request.body.escolhido
+  database.db.all(sqlForMunicipalities, [chosenMunicipalityId], (err, rows) => {
+    if (err) {
+      throw err
+    }
+
+    if (rows.length === 0) {
+      // Se nenhum município for encontrado com o muni_id fornecido
+      response.status(404).send('Município não encontrado')
+    } else {
+      // Se encontrar o município, enviar os dados ao cliente
+      const municipalityData = JSON.stringify(rows)
+      response.send(municipalityData)
+      
+      // Registre as informações no console do servidor
+      console.log('Dados do município escolhido:', municipalityData)
+    }
+  })
+}
+
+function generalResults( request, response) {
+  const sqlGeneralResults = 'select cand_nome, cargo_nome, cand_votos, cand_status from votos_cand_estado'
+
+  database.db.all(sqlGeneralResults, [], (err, rows) => {
+    if (err) {
+      throw err
+    }
+
+    response.send(rows)
+
+  })
+
+}
+
 
 module.exports = {
   searchByCandidate,
   searchByOffice,
-  searchOffice
+  searchOffice,
+  listMunicipalities,
+  searchByMunicipalities,
+  generalResults
 };
