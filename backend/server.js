@@ -10,7 +10,7 @@ app.post('/candidatos', endpoints.searchByCandidate)
 app.post('/byoffice', endpoints.searchOffice)
 app.post('/bymunicipalities/list', endpoints.listMunicipalities)
 app.post('/bymunicipalities/search', endpoints.searchByMunicipalities)
-app.post('/generalResult', endpoints.generalResults)
+app.post('/generalresult', endpoints.getAllCandidates)
 
 app.listen(3333, () => {
     console.log('o servidor iniciou')

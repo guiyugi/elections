@@ -1,3 +1,4 @@
+const { response } = require('express');
 const database = require('./database.js');
 
 function searchInDatabase(candidate, response) {
@@ -68,7 +69,7 @@ function listMunicipalities(request, response){
 
 function searchByMunicipalities(request, response) {
   const sqlForMunicipalities = 'SELECT cand_nome, cargo_nome, cand_votos, cand_status FROM votos_cand_municipio WHERE muni_id = ?'
-  const chosenMunicipalityId = request.body.escolhido
+  const chosenMunicipalityId = request.body.selectedValue
   database.db.all(sqlForMunicipalities, [chosenMunicipalityId], (err, rows) => {
     if (err) {
       throw err
@@ -83,24 +84,34 @@ function searchByMunicipalities(request, response) {
       response.send(municipalityData)
       
       // Registre as informações no console do servidor
-      console.log('Dados do município escolhido:', municipalityData)
+      console.log('Dados do município selectedValue:', municipalityData)
     }
   })
 }
 
-function generalResults( request, response) {
-  const sqlGeneralResults = 'select cand_nome, cargo_nome, cand_votos, cand_status from votos_cand_estado'
+function getAllCandidates(request, response) {
+  const sqlForAllCandidates = 'SELECT cand_nome, cargo_nome, cand_votos, cand_status FROM votos_cand_estado ORDER BY cand_status, cand_nome ASC';
 
-  database.db.all(sqlGeneralResults, [], (err, rows) => {
+  database.db.all(sqlForAllCandidates, (err, rows) => {
     if (err) {
-      throw err
+      response.status(500).json({ error: 'Erro na consulta.' });
+      return;
     }
 
-    response.send(rows)
+    // Converte os resultados para o formato JSON
+    const candidatesData = JSON.stringify(rows);
 
-  })
-
+    // Envia os resultados filtrados ao cliente
+    response.send(candidatesData);
+  });
 }
+
+
+
+
+
+
+
 
 
 module.exports = {
@@ -109,5 +120,5 @@ module.exports = {
   searchOffice,
   listMunicipalities,
   searchByMunicipalities,
-  generalResults
+  getAllCandidates
 };

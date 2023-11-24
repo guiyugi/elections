@@ -1,84 +1,70 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Definir a opção padrão como selecionada
-  document.getElementById('select').selectedIndex = 0;
 
-  // Adicionar um ouvinte de evento ao select
-  var select = document.getElementById("select");
+  document.getElementById('select').selectedIndex = 0
+
+  var select = document.getElementById("select")
   select.addEventListener("change", function (event) {
-    var valorSelecionado = event.target.value;
-    console.log("Valor selecionado: " + valorSelecionado);
+      var selectedValue = event.target.value
+      console.log("Valor selecionado: " + selectedValue)
 
-    enviarRequisicao();
-  });
-});
+      enviarRequisicao()
+  })
+})
 
 async function enviarRequisicao() {
-  var select = document.getElementById("select");
-  var valorSelecionado = select.value;
+  var select = document.getElementById("select")
+  var selectedValue = select.value
 
-  // Cria um objeto para enviar no corpo da requisição POST
   var data = {
-    cargoId: valorSelecionado
-  };
+      cargoId: selectedValue
+  }
 
   try {
-    const response = await fetch('/byoffice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    });
+      const response = await fetch('/byoffice', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
 
-    if (!response.ok) {
-      throw new Error('Erro na requisição');
-    }
+      if (!response.ok) {
+          throw new Error('Erro na requisição')
+      }
 
-    const candidateInfo = await response.json();
-    displayCandidate(candidateInfo);
+      const candidateInfo = await response.json()
+      displayCandidate(candidateInfo)
   } catch (error) {
-    console.error('Erro na requisição:', error);
+      console.error('Erro na requisição:', error)
   }
 }
 
-
 function displayCandidate(candidateInfoArray) {
-  // Selecionar a div com ID "candidateInfo"
-  const candidateInfoDiv = document.getElementById('candidateInfo');
+  const candidateTable = document.getElementById('candidateTable')
 
-  // Limpar o conteúdo atual da div
-  candidateInfoDiv.innerHTML = '';
+  candidateTable.innerHTML = ''
 
-  // Iterar sobre cada candidato na array
-  candidateInfoArray.forEach((candidateInfo, index) => {
-    const cand_name = candidateInfo.cand_nome;
-    const cargo_nome = candidateInfo.cargo_nome;
-    const cand_votos = candidateInfo.cand_votos;
+  const thead = document.createElement('thead')
+  const headerRow = document.createElement('tr')
+  headerRow.innerHTML = '<th>Nome</th><th>Cargo</th><th>Votos</th>'
+  thead.appendChild(headerRow)
+  candidateTable.appendChild(thead)
 
-    // Criar um elemento div para cada candidato
-    const candidateDiv = document.createElement('div');
+  const tbody = document.createElement('tbody')
 
-    // Criar elementos p para cada informação
-    const nameParagraph = document.createElement('p');
-    const cargoParagraph = document.createElement('p');
-    const votosParagraph = document.createElement('p');
+  candidateInfoArray.forEach((candidateInfo) => {
+      const cand_name = candidateInfo.cand_nome
+      const cargo_nome = candidateInfo.cargo_nome
+      const cand_votos = candidateInfo.cand_votos
 
-    // Adicionar as informações aos elementos p
-    nameParagraph.textContent = `Nome: ${cand_name}`;
-    cargoParagraph.textContent = `Cargo: ${cargo_nome}`;
-    votosParagraph.textContent = `Votos: ${cand_votos}`;
+      const row = document.createElement('tr')
 
-    // Adicionar os elementos p à div do candidato
-    candidateDiv.appendChild(nameParagraph);
-    candidateDiv.appendChild(cargoParagraph);
-    candidateDiv.appendChild(votosParagraph);
 
-    // Adicionar a div do candidato à div principal
-    candidateInfoDiv.appendChild(candidateDiv);
+      row.innerHTML = `<td>${cand_name}</td><td>${cargo_nome}</td><td>${cand_votos}</td>`
 
-    // Adicionar uma linha (<hr>) entre candidatos, exceto após o último
-    if (index < candidateInfoArray.length - 1) {
-      candidateInfoDiv.appendChild(document.createElement('hr'));
-    }
-  });
+
+      tbody.appendChild(row)
+  })
+
+  candidateTable.appendChild(tbody)
 }
