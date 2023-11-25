@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Eleições 2022</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <header>
+      <div class="title1">
+          <h1>Eleições 2022</h1>
+      </div>
+      
+      <nav class="navbar p-0 mb-0 navbar-dark navbar-expand-sm sticky-top" id = "#mainNav">
+          <div class="container mobileMenu">
+              </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end" id="menuNavbar">
+                  <div class="navbar-nav my-auto">
+                      <a href="index.html" class="nav-link">Home</a>
+                      <a href='candidate.html' class="nav-link">Candidato</a>
+                      <a href='office.html' class="nav-link">Cargo</a>
+                      <a href='county.html' class="nav-link">Município</a>
+                      <a href='all.html' class="nav-link">Todos</a>
+                  </div>
+              </div>
+          </div>
+      </nav>
+      
+  </header>
+
+
+    <div id="container">
+      <div>
+        <div class="results">
+          <h2>Resultados Eleições 2022 - Piauí</h2>
+          <div>
+            <input type="radio" name="opcaoStatus" value="todos" id="opcaoTodos" checked> <label for="opcaoTodos">Todos</label>
+            <input type="radio" name="opcaoStatus" value="eleito" id="opcaoEleito"> <label for="opcaoEleito">Eleitos</label>
+            <input type="radio" name="opcaoStatus" value="naoeleito" id="opcaoNaoEleito"> <label for="opcaoNaoEleito">Não Eleitos</label>    
+          </div>
+        </div>
+
+        <div id="resultadosGeral">
+          <table class="tabela-resultados"></table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+    <script src="./js/bygeneralresult.js"></script>
+  </body>
+</html>

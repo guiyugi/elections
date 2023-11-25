@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Eleições 2022</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div>
+      <header>
+          <div class="title1">
+              <h1>Eleições 2022</h1>
+          </div>
+          <nav class="navbar p-0 mb-0 navbar-dark navbar-expand-sm sticky-top" id = "#mainNav">
+            <div class="container mobileMenu">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="menuNavbar">
+                    <div class="navbar-nav my-auto">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href='candidate.html' class="nav-link">Candidato</a>
+                        <a href='office.html' class="nav-link">Cargo</a>
+                        <a href='county.html' class="nav-link">Município</a>
+                        <a href='all.html' class="nav-link">Todos</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+      </header>
+    </div>
+
+    <div id="container">
+      <div>
+      <div class="selects" id="office">
+          <label for="office">Selecione Cargo:</label>
+          <select id="select" onchange="enviarRequisicao()">
+            <option value="" selected disabled>Selecione uma opção</option>
+            <option value="1">Presidente</option>
+            <option value="6">Deputado Federal</option>
+            <option value="7">Deputado Estadual</option>
+            <option value="3">Governador</option>
+            <option value="5">Senador</option>
+        </select>
+      </div></div>
+      <table id="candidateTable">
+          <!-- A tabela será preenchida dinamicamente com os resultados -->
+      </table>
+    </div>
+
+    
+
+
+
+    
+    <script src="./js/byoffice.js"></script>
+  </body>
+</html>

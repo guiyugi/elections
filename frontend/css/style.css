@@ -1,0 +1,307 @@
+#candidateInfo{
+    display: flex;
+    justify-content: center;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+.container-fluid{
+    min-width: 100%;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    background-color: #013A86;
+}
+
+.title1 {
+    border-bottom: 2px solid #fff;
+    margin-bottom: 10px;
+}
+
+.title1 h1 {
+    margin: 0;
+}
+
+nav {
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin: 0 10px;
+    font-size: 14px; /* Aumentado o tamanho da fonte */
+}
+
+nav a:hover {
+    background-color: #2980b9;
+    border-radius: 5px;
+}
+nav-link a{
+    color: #2980b9;
+}
+.button {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+}
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 0.4fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 0.1em;
+    justify-content: center;
+  }
+  
+tr
+  
+.button-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.button-title h2 {
+    font-size: 30px;
+    color: #333;
+}
+  
+.button a {
+    text-decoration: none;
+}
+
+.button button {
+    width: 150px;
+    padding: 15px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button button:hover {
+    background-color: #013A86; 
+}
+
+.image img {
+    display: none;
+    position: fixed;
+    height: 100vh;
+}
+
+.bottom{
+    
+    width: 100%;
+    height: -webkit-fill-available;
+    margin-top: auto;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-content: stretch;
+}
+
+.selects {
+    background-color: #013A86;
+    padding: 7px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 10px 1px;
+}
+
+.selects label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 16px;
+    color: #fff;
+}
+
+.selects select {
+    width: 100%;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.selects select option {
+    font-size: 14px;
+    color: #333; 
+    background-color: #A4A4A4; 
+}
+
+.results {
+    color: white;
+    background-color: #013A86;
+    padding: 1px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    text-align: center;
+    height: 14%;
+}
+
+th{
+    text-align: center;
+    padding: 10px;
+}
+td {
+    text-align: left;
+}
+
+
+/* Estilo para a tabela */
+table {
+    width: 100vh; /* Defina a largura máxima da tabela */
+    margin: auto; /* Centralize a tabela e adicione margens superior e inferior */
+    border-collapse: collapse;
+  }
+
+  /* Estilo para as células do cabeçalho da tabela */
+  table th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilo para as células da tabela */
+  table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Estilo para linhas alternadas da tabela */
+  table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+.results h2 {
+    color: #fff;
+    font-size: 20px;
+}
+
+
+
+.content{
+    display: flex; 
+    flex-direction: column;
+}
+.nomes{display: flex; justify-content: center; flex-direction: column;}
+.nomes > p {
+    margin: 0;
+  }
+
+  
+footer {
+
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    z-index: 1; /* Certifique-se de que o footer esteja na frente da imagem */
+}
+
+.tabela{
+    justify-content: center;
+}
+#resultadosGeral table {
+    width: 100%; /* Largura total da tabela */
+    border-collapse: collapse; /* Para remover espaçamento entre as células */
+}
+
+#resultadosGeral th, #resultadosGeral td {
+    border: 1px solid #ddd; /* Adiciona uma borda fina para separar as células */
+    padding: 8px; /* Adiciona algum espaçamento interno para melhor aparência */
+}
+
+/* Use porcentagens para definir larguras relativas para cada coluna */
+#resultadosGeral th:nth-child(1),
+#resultadosGeral td:nth-child(1) {
+    width: 25%;
+}
+
+#resultadosGeral th:nth-child(2),
+#resultadosGeral td:nth-child(2) {
+    width: 25%;
+}
+
+#resultadosGeral th:nth-child(3),
+#resultadosGeral td:nth-child(3) {
+    width: 25%;
+}
+
+#resultadosGeral th:nth-child(4),
+#resultadosGeral td:nth-child(4) {
+    width: 25%;
+}
+
+/* Adiciona uma margem relativa ao contêiner da tabela */
+#resultadosGeral {
+    margin: 1em; /* Use em ou rem para tornar a margem relativa ao tamanho do texto */
+}
+
+/* Media query para ajustar a margem em telas pequenas (ex: celulares) */
+@media (max-width: 767px) {
+    #resultadosGeral {
+        margin: 0.5em; /* Ajuste a margem conforme necessário para telas pequenas */
+    }
+}
+@media (max-width: 767px) {
+    header {
+      min-width: 100%;
+      width: min-content;
+    }
+    nav{
+        width: fit-content;
+        font-size: 10px;
+        min-width: 100%;
+    }
+  }
+
+a.nav-link {
+    color: rgb(252, 250, 250);
+    font-weight: bolder;
+}
+
+div#menuNavbar {
+    justify-content: center;
+    flex-direction: column
+
+}
+
+div.container.mobileMenu {
+    flex-direction: row-reverse
+}
+
+div.selects#candidate {
+    display: flex;
+    justify-content: center;
+    flex-direction: column
+}
+
+h2 {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}

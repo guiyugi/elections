@@ -1,0 +1,26 @@
+{
+  "name": "trabalho3-bloco4",
+  "version": "1.0.0",
+  "description": "Trabalho correspondente à 2ª Avaliação da disciplina Programação III do período letivo 2023.1 do curso de Bacharelado em Ciência da Computação da Universidade Estadual do Piauí, Campus de Parnaíba.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uespi-phb/eleicoes2022.git"
+  },
+  "author": "Nicson Milena Guilherme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uespi-phb/eleicoes2022/issues"
+  },
+  "homepage": "https://github.com/uespi-phb/eleicoes2022#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

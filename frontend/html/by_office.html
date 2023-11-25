@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Eleições 2022</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>Eleições 2022</h1>
+
+    <div class="selects" id="office">
+        <label for="office">Selecione Cargo:</label>
+        <select id="select" onchange="enviarRequisicao()">
+            <option value="" selected disabled>Selecione uma opção</option>
+            <option value="1">Presidente</option>
+            <option value="6">Deputado Federal</option>
+            <option value="7">Deputado Estadual</option>
+            <option value="3">Governador</option>
+            <option value="5">Senador</option>
+        </select>
+    </div>
+
+    <table id="candidateTable">
+        <!-- A tabela será preenchida dinamicamente com os resultados -->
+    </table>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>

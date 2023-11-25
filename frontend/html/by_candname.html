@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Eleições 2022</title>
+    <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1>Eleições 2022</h1>
+    
+    <div id="container">
+      <form id="candidateForm">
+        <label for="candidateInput">Selecione Candidato:</label>
+        <input type="text" id="candidateList" list="candidateDatalist">
+        <datalist id="candidateDatalist"></datalist>
+        <button type="button" id="submitBtn">Enviar Seleção</button>
+      </form>
+    </div>
+    
+    <div id="candidateInfo"></div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
