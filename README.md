@@ -20,9 +20,9 @@ cd eleicoes2022
 npm install
 ```
 
-##Configuração do Banco de Dados
+## Configuração do Banco de Dados
 
-##Certifique-se de que o SQLite3 está instalado e configurado corretamente no seu ambiente.
+## Certifique-se de que o SQLite3 está instalado e configurado corretamente no seu ambiente.
 Execução do Servidor
 ```bash
 npm start
